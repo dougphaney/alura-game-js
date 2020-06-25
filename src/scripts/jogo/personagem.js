@@ -1,23 +1,32 @@
 class Personagem extends Animacao {
-  constructor(matriz, imagem, x, largura, altura, lSprite, aSprite) {
-    super(matriz, imagem, x, largura, altura, lSprite, aSprite);
+  constructor(matriz, imagem, x, variacaoY, largura, altura, lSprite, aSprite) {
+    super(matriz, imagem, x, variacaoY, largura, altura, lSprite, aSprite);
 
-    this.yInicial = height - this.altura;
+    this.yInicial = height - this.altura - this.variacaoY;
     this.y = this.yInicial;
     this.velocidadeDoPulo = 0;
     this.gravidade = 3;
+    this.pulos = 0;
   }
 
   pular() {
-    this.velocidadeDoPulo = - 30;
+    // if(this.pulos > 0 ) {
+    //   this.velocidadeDoPulo = - 30
+    //   this.pulos--
+    // }
+    if(this.pulos < 2 ) {
+      this.velocidadeDoPulo = - 30
+      this.pulos++
+    }
   }
-
+  
   retornar() {
-    this.y = this.y + this.velocidadeDoPulo;
-    this.velocidadeDoPulo = this.velocidadeDoPulo + this.gravidade;
+    this.y += this.velocidadeDoPulo;
+    this.velocidadeDoPulo += this.gravidade;
 
     if(this.y > this.yInicial) {
       this.y = this.yInicial
+      this.pulos = 0
     }
   }
 
